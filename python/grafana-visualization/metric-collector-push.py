@@ -6,13 +6,13 @@ import os
 from sonarqube import SonarCloudClient
 from prometheus_client import CollectorRegistry, Gauge, push_to_gateway
 
-# SonarQube API endpoint
+# SonarQube API endpoints
 SONARCLOUD_URL = 'http://localhost:9000/'
 
 # SonarQube Token
 SONARCLOUD_TOKEN = "squ_c06649c70def5a44e8aceb52f5d9de999fec5dac"
 
-# Prometheus Pushgateway endpoint
+# Prometheus Pushgateway endpoints
 PROMETHEUS_PUSHGATEWAY_ENDPOINT = 'http://localhost:9091'
 
 # Metric to collect from SonarQube
