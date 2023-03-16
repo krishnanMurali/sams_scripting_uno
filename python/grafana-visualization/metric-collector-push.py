@@ -41,11 +41,11 @@ def get_sonarqube_metric_value(metric, component_key):
     component = sonar.measures.get_component_with_specified_measures(
         component=SONARQUBE_COMPONENT_KEY,
         fields="metrics,periods",
-        metricKeys="coverage")
+        metricKeys="code_smells")
     measures = component['component']['measures']
     for metric_data in measures:
         print(metric_data['metric'])
-        if metric_data['metric'] == 'coverage':
+        if metric_data['metric'] == 'code_smells':
             metric_value = metric_data['value']
             break
     print('metric_value : ', metric_value)
@@ -55,7 +55,7 @@ def get_sonarqube_metric_value(metric, component_key):
 def push_to_prometheus_pushgateway(metric_name, metric_value):
     # Create a Prometheus Gauge metric
     registry = CollectorRegistry()
-    gauge_metric = Gauge(metric_name, 'Sam Alpha UNO project Coverage', registry=registry)
+    gauge_metric = Gauge(metric_name, 'Sam Alpha UNO project code_smells', registry=registry)
     # Set the metric value
     gauge_metric.set(metric_value)
     # Push the metric to the Pushgateway
