@@ -37,6 +37,7 @@ def main():
 def push_to_influxdb(data):
     json_body = []
     client = InfluxDBClient(host='localhost', port=8086, username='murali',password='password123', database='test_data')
+    for row in data:
         json_body.append({
             "measurement": "code_smells",
             "tags": {
