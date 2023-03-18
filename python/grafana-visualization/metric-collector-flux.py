@@ -29,7 +29,6 @@ def main():
         sonarqube_metric_value = get_sonarqube_metric_value(SONARQUBE_METRIC, SONARQUBE_COMPONENT_KEY)
         print('SQ-metric-value :', sonarqube_metric_value)
         # Push data to influx db
-        
 
         # Wait for 5 minutes before collecting the metric again
         time.sleep(300)
@@ -38,18 +37,16 @@ def push_to_influxdb(data):
     json_body = []
     client = InfluxDBClient(host='localhost', port=8086, username='murali',password='password123', database='test_data')
     for row in data:
-        json_body.append({
+        json_body=[{
             "measurement": "code_smells",
-            "tags": {
-                "tag1":row[0]
-                "tag2":row[1]
-            },
+            "tags":{"tag1":row[0],"tag2":row[1]},
             "time":row[2],
             "fields":{
-                "field1": float(row[3])
+                "field1": float(row[3]),
                 "field2": float(row[4])
             }
-        })
+        }]
+
     client.write_points(json_body)
 
 # Function to get the metric value from SonarQube
